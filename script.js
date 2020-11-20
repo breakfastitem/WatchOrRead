@@ -1,5 +1,7 @@
 queryUrl= "http://openlibrary.org/search.json?title=the+lord+of+the+rings";
 
+//Directions for search api https://openlibrary.org/dev/docs/api/search
+
 $.ajax({
     method:"GET",
     url: queryUrl
