@@ -1,17 +1,17 @@
 /*General Stylings*/
 body {
     background-color: white;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 0px;
 }
 
 p {
-    font-family: 'Poppins', sans-serif;
     font-size: 16px;
     color: black;
-    text-align: center;
 }
 
 h1 {
-    font-family: 'Poppins', sans-serif;
+    
     font-size: 75px;
     font-weight: 700;
     color: rgb(115, 161, 7);
@@ -20,43 +20,72 @@ h1 {
 }
 
 h2 {
-    font-family: 'Poppins', sans-serif;
+    
     font-size: 25px;
     color: rgb(115, 161, 7);
-    font-weight: 50;
+    font-weight: 200;
     text-align: center;
 }
-
 a {
     color: white;
     text-decoration: none;
     font-size: 16px;
-    font-family: 'Poppins', sans-serif;
+   
+}
+ul {
+    list-style-type: none;
+    margin-bottom: 0px;
+}
+form {
+    margin-bottom:0px;
+}
+input {
+    margin-bottom:0px;
+}
+button {
+    margin-bottom:0px;
 }
 
 a:hover {
     color: rgb(115, 161, 7);
 }
 
-/*Class Stylings*/
+button:hover {
+    background-color: rgb(115, 161, 7);
+    color: white;
+}
+button:focus {
+    outline: none;
+}
 
+/*Class Stylings*/
+.container{
+   width: 1200px;
+}
 .header {
     background-color: black;
     font-family: 'Poppins', sans-serif;
     color: white;    
 }
 
-.header nav ul {
-    list-style-type: none;
-}
-
-.header nav ul li {
+ .header nav ul li {
     display: inline-block;
+    margin-left: 20px;
+    margin-top: 10px;
+    
 }
 
-.about {
+.cover {
+    width:100px;
+    height: 150px;
+}
+
+/*Id stylings*/
+#about {
+
     text-align: center;
     max-width: 75%;
-    margin: 0 auto;
+    margin-right: auto;
+    margin-left: auto;
+    
 }
-
