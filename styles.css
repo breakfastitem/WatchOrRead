@@ -26,7 +26,6 @@ h2 {
     font-weight: 200;
     text-align: center;
 }
-
 a {
     color: white;
     text-decoration: none;
@@ -36,6 +35,15 @@ a {
 ul {
     list-style-type: none;
     margin-bottom: 0px;
+}
+form {
+    margin-bottom:0px;
+}
+input {
+    margin-bottom:0px;
+}
+button {
+    margin-bottom:0px;
 }
 
 a:hover {
@@ -51,7 +59,9 @@ button:focus {
 }
 
 /*Class Stylings*/
-
+.container{
+   width: 1200px;
+}
 .header {
     background-color: black;
     font-family: 'Poppins', sans-serif;
