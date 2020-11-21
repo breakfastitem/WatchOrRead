@@ -12,7 +12,20 @@ function searchMovie(name) {
         url: "http://www.omdbapi.com/?t="+name+"&apikey=8e4b0c73"
 
     }).then(function (res) {
-        console.log(res);
+
+        // movie title
+        var movieTitle = res.Title
+        $("#movie-title").text(movieTitle);
+
+        // movie poster
+        var imgURL = res.Poster
+        var moviePoster = $("#movie-poster").attr("src", imgURL);
+
+        //movie plot
+        var moviePlot = res.Plot
+        $("#movie-plot").text(moviePlot);
+
+
     });
 }
 /**
