@@ -7,11 +7,15 @@
  */
 function searchMovie(name) {
 
+    var omdbUrl="http://www.omdbapi.com/?t=" + name + "&apikey=8e4b0c73";
+
     $.ajax({
         method: "GET",
-        url: "http://www.omdbapi.com/?t=" + name + "&apikey=8e4b0c73"
+        url: omdbUrl
 
     }).then(function (res) {
+
+        console.log(res);
 
         // movie title
         var movieTitle = res.Title;
@@ -24,6 +28,9 @@ function searchMovie(name) {
         //movie plot
         var moviePlot = res.Plot;
         $("#movie-plot").text(moviePlot);
+
+        //movie rating
+        $("#imdb-score").text(res.imdbRating);
 
     });
 
@@ -58,11 +65,10 @@ function searchBook(movieName) {
             method: "GET",
             url: worksUrl
         }).then(function(res){
-            console.log(res.description.value);
-
             $("#book-plot").text(res.description.value);
-
         });
+
+        //books rating
         
     });
 
