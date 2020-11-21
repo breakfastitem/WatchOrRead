@@ -27,7 +27,55 @@ function searchMovie(name) {
 
 
     });
+
+
+
+
 }
+
+
+
+
+
+function searchBook(movieName){
+ 
+    var openLibraryUrl = "http://openlibrary.org/search.json?title="+movieName;
+    //Directions for search api https://openlibrary.org/dev/docs/api/search
+    
+    $.ajax({
+        method: "GET",
+        url: openLibraryUrl
+
+    }).then(function (res) {
+        console.log(res);
+
+        var bookTitle = res.docs[0].title;
+        $("#book-title").text(bookTitle);
+
+        var bookIsbn = res.docs[0].isbn[0];
+        
+
+        // get book cover
+                var bookCoverURL = "http://covers.openlibrary.org/b/isbn/" + bookIsbn + "-M.jpg";
+
+                // $.ajax({
+                //     method: "GET",
+                //     url: bookCoverURL
+
+                // }).then(function (res) {
+                //     console.log(res);
+                //     // var displayCover = $("#book-cover").attr("src", )
+                    
+                // })
+    
+        
+
+    });
+    }
+
+
+
+
 /**
  * Event Listeners
  */
@@ -38,23 +86,16 @@ $(document).ready(function () {
         var movieName = $("#search-input").val();
 
         searchMovie(movieName);
+
+        searchBook(movieName);
     })
 
 
 
 });
 
+
 /**
  * main
  */
-var openLibraryUrl = "http://openlibrary.org/search.json?title=the+lord+of+the+rings";
-//Directions for search api https://openlibrary.org/dev/docs/api/search
 
-$.ajax({
-    method: "GET",
-    url: openLibraryUrl
-}).then(function (response) {
-    console.log(response);
-
-    console.log("Author of First Result: " + response.docs[0].author_name);
-});
