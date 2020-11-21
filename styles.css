@@ -12,6 +12,7 @@ p {
 h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 75px;
+    font-weight: 700;
     color: rgb(115, 161, 7);
     text-align: center;
     font-style: italic;

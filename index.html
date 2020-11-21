@@ -1,54 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Watch Or Read</title>
 
-    <link rel="stylesheet" href="./styles.css"></link>
+
+
+    <!--Skeleton Boilerplate-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+    <!--LocalStyles-->
+    <link rel="stylesheet" href="./styles.css">
+    </link>
+
+    <!--fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,200;1,900&display=swap"
+        rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,200;1,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f20c9d500c.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
-    <header class="header">
-        <nav>
-            <ul>
-                <li>
-                    <a href="#">Home</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
 
-    <main class="content">
-        <h1>Watch or Read</h1>
-    
-        <div class="about">
-        <p>
-            A paragraph about us goes here. blah blah blah blah blah
-        </p>
+    <div class="container">
+        <div class="row">
+            <header class="header twelve columns">
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
         </div>
-        <section id="search-div">
-            <form>
-                <input id="search-bar" type="search" placeholder="Search" aria-label="Search">
-            </form>
+        <div class="row">
+            
+            <main class="content twelve columns">
+                <h1>Watch or Read</h1>
 
-        </section>
-        
-    </main>
+                <div class="about">
+                    <p>
+                        A paragraph about us goes here. blah blah blah blah blah
+                    </p>
+                </div>
+                <section id="search-div">
+                    <form>
+                        <input id="search-input" type="search" placeholder="Search" aria-label="Search">
+                        <button id="search-button">search</button>
+                    </form>
 
-    <aside id="search-aside">
+                </section>
 
-    </aside>
+            </main>
+        </div>
+        <!--Search Results-->
+        <div class="row">
+            <aside id="book-results six columns">
 
+            </aside>
+            <aside id="Movie-results six columns">
 
+            </aside>
+        </div>
 
-    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="script.js"></script>
+    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="script.js" ></script>
 </body>
+
 </html>
