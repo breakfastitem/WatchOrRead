@@ -37,7 +37,7 @@
             </header>
         </div>
         <div class="row">
-            
+
             <main class="content twelve columns">
                 <h1>Watch or Read</h1>
 
@@ -56,14 +56,44 @@
 
             </main>
         </div>
+        <hr>
         <!--Search Results-->
         <div class="row">
-            <aside id="book-results six columns">
+            <div class="five columns">
+                <section id="book-results">
+                    <h2 class="result-title" id="book-title">Book Title</h2>
+                    <div class="row">
+                        <div class="three columns">
+                            <img class="cover" id="book-cover" src="https://place-hold.it/100x150" />
+                        </div>
+                        <div class="eight columns" >
+                            <p class="description" id="book-plot">book description</p>
+                        </div>
+                        
+                    </div>
 
-            </aside>
-            <aside id="Movie-results six columns">
+                    <p class="rating" id="book-rating">GoodRead Rating: <span id="goodread-score">3</span></p>
 
-            </aside>
+                </section>
+            </div>
+            <div class="five columns">
+                <section id="movie-results">
+
+                    <h2 class="result-title" id="movie-title">Movie Title</h2>
+                    <div class="row">
+                        <div class="three columns">
+                            <img class="cover" id="movie-poster" src="https://place-hold.it/100x150" />
+                        </div>
+                        <div class="eight columns" >
+                            <p class="description" id="movie-plot">Movie description</p>
+                        </div>
+                        
+                    </div>
+
+                    <p class="rating" id="movie-rating">IMDB Rating: <span id="imdb-score">3</span></p>
+
+                </section>
+            </div>
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
