@@ -1,6 +1,7 @@
 /**
  * static Variables
  */
+var firstSearch = "sorcerer's stone";
 
 /**
  * static functions
@@ -46,7 +47,7 @@ function searchBook(movieName) {
         url: openLibraryUrl
 
     }).then(function (res) {
-
+        console.log(res.docs[0]);
         //book title
         var bookTitle = res.docs[0].title;
         $("#book-title").text(bookTitle);
@@ -69,7 +70,15 @@ function searchBook(movieName) {
         });
 
         //books rating
-        
+        var goodReadsUrl=`https://www.goodreads.com/book/isbn/0441172717?callback=myCallback&format=json&user_id=124934576`;
+        $.ajax({
+            method: "GET",
+            url: goodReadsUrl
+        }).then(function(res){
+
+            console.log(res);
+
+        });
     });
 
 }
@@ -88,12 +97,18 @@ $(document).ready(function () {
         searchBook(movieName);
     })
 
-
-
 });
 
 
 /**
  * main
  */
+var firstSearchTemp = localStorage.getItem("search");
 
+if(firstSearchTemp != null){
+    firstSearch=firstSearchTemp;
+}
+
+searchMovie(firstSearch);
+
+searchBook(firstSearch);
