@@ -10,6 +10,11 @@ p {
     color: black;
 }
 
+hr {
+    border: 3px solid;
+
+}
+
 h1 {
     
     font-size: 75px;
@@ -17,6 +22,7 @@ h1 {
     color: rgb(115, 161, 7);
     text-align: center;
     font-style: italic;
+    padding-top: 30px;
 }
 
 h2 {
@@ -41,9 +47,11 @@ form {
 }
 input {
     margin-bottom:0px;
+    width: 100%;
 }
 button {
     margin-bottom:0px;
+    width: 100%;
 }
 
 a:hover {
