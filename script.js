@@ -102,7 +102,7 @@ function searchBook(name, authorName) {
  * Event Listeners
  */
 $(document).ready(function () {
-    $("#search-button").on("click", function (event) {
+    $("#book-search-button").on("click", function (event) {
         event.preventDefault();
 
         var bookTitle = $("#title-input").val();
@@ -125,6 +125,4 @@ if (firstSearchTemp != null) {
     firstSearch = firstSearchTemp;
 }
 
-searchMovie(firstSearch);
-
-searchBook(firstSearch);
+searchBook(firstSearch,"");
