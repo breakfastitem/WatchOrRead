@@ -24,19 +24,22 @@
 
 <body>
 
-    <div class="container">
+
         <div class="row">
             <header class="header twelve columns">
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="#">Home</a>
-                        </li>
-                    </ul>
-                </nav>
-            </header>
+                <div class="container">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="#">Home</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </header>
+            </div>
         </div>
 
+    <div class="container">
         <div class="row">
 
             <main class="content twelve columns">
@@ -50,27 +53,55 @@
                 <section id="search-div">
                     <form>
                         <div class="row">
-                            <div class="nine columns">
-                                <input id="title-input" type="search" placeholder="Title" aria-label="Search">
-                                <br>
+                            <div class="six columns">
+                                <input id="title-input" type="search" placeholder="Book Title" aria-label="Search">
                                 <input id="author-input" type="search" placeholder="Author" aria-label="Search">
-                                <br>
-                                <input id="year-input" type="search" placeholder="Year" aria-label="Search">
+                                <button id="search-button">search</button>
                             </div>
-                            <div class="three columns">
-                             <button id="search-button">search</button>
+                    </form>
+
+                    <form>
+                        <div class="row">
+                            <div class="six columns">
+                                <input id="movie-input" type="search" placeholder="Movie Title" aria-label="Search">
+                                <button id="search-button">search</button>
                             </div>
                         </div>
-                        
-
                     </form>
 
                 </section>
 
             </main>
         </div>
+
         <hr>
-        <!--Search Results-->
+
+
+        <!-- Search Results -->
+        <div class="row">
+            <div class="six columns">
+                <section id="results-display">
+                    <h2 class="result-title" id="book-results">Book Results</h2>
+                        <button class="button-primary" id="results">harry potter and the sorcerer's stone</button>
+                        <button class="button-primary" id="results">harry potter and the chamber of secrets</button>
+                        <button class="button-primary" id="results">harry potter and the prisoner of azkaban</button>
+            </div>
+
+            <div class="six columns">
+                    <h2 class="result-title" id="movie-results">Movie Results</h2>
+                        <button class="button-primary" id="results">harry potter and the sorcerer's stone</button>
+                        <button class="button-primary" id="results">harry potter and the chamber of secrets</button>
+                        <button class="button-primary" id="results">harry potter and the prisoner of azkaban</button>
+                </div>
+            </section>
+        </div>
+
+
+        <hr>
+
+
+
+        <!--Search Results Display-->
         <div class="row">
             <div class="six columns">
                 <section id="book-results">
