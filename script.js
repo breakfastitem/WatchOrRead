@@ -16,8 +16,6 @@ function searchMovie(name) {
 
     }).then(function (res) {
 
-        console.log(res);
-
         // movie title
         var movieTitle = res.Title;
         $("#movie-title").text(movieTitle);
@@ -60,7 +58,7 @@ function searchBook(name, authorName) {
             url: openLibraryUrl
 
         }).then(function (res) {
-            console.log(res.docs[0]);
+            
             //book title
             var bookTitle = res.docs[0].title;
             $("#book-title").text(bookTitle);
@@ -83,13 +81,13 @@ function searchBook(name, authorName) {
             });
 
             //books rating
-            var goodReadsUrl = `https://www.goodreads.com/book/isbn/0441172717?callback=myCallback&format=json&user_id=124934576`;
+            var googleBooksUrl=`https://www.googleapis.com/books/v1/volumes?q=isbn:${bookIsbn}&key=AIzaSyBtYq9z6CgPa4rmGWVSkwwSORdFIuFLc_4`;
             $.ajax({
                 method: "GET",
-                url: goodReadsUrl
+                url: googleBooksUrl
             }).then(function (res) {
 
-                console.log(res);
+                $("#book-rating").text("Google Books rating" + res.items[0].volumeInfo.averageRating*2+"/10");
 
             });
         });
@@ -99,8 +97,6 @@ function searchBook(name, authorName) {
 
 
 }
-
-
 
 /**
  * Event Listeners
@@ -114,6 +110,7 @@ $(document).ready(function () {
         
         searchBook(bookTitle, bookAuthor);
 
+        localStorage.setItem("search",bookTitle);
     })
 
 });
