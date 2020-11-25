@@ -97,6 +97,10 @@ button:focus {
 
 }
 
+.search-input {
+    margin-bottom: 5px;
+}
+
 /*Id stylings*/
 #about {
 

@@ -87,7 +87,7 @@ function searchBook(name, authorName) {
                 url: googleBooksUrl
             }).then(function (res) {
 
-                $("#book-rating").text("Google Books rating" + res.items[0].volumeInfo.averageRating*2+"/10");
+                $("#google-books-score").text(res.items[0].volumeInfo.averageRating*2);
 
             });
         });
