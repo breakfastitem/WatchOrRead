@@ -3,6 +3,9 @@
  */
 var firstSearch = "sorcerer's stone";
 
+var bookResults;
+var movieResults;
+
 /**
  * static functions
  */
@@ -111,6 +114,17 @@ $(document).ready(function () {
         searchBook(bookTitle, bookAuthor);
 
         localStorage.setItem("search",bookTitle);
+    })
+
+    $(".results").on("click",function(event){
+        event.preventDefault();
+
+        var type = event.target.id.split("-")[0];
+        var index = event.target.id.split("-")[1];
+
+        console.log(type+" "+index);
+
+        
     })
 
 });
