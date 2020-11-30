@@ -52,24 +52,28 @@
 
 
                 <section id="search-div">
-                    <form>
-                        <div class="row">
-                            <div class="six columns">
-                                <input id="title-input" type="search" placeholder="Book Title" aria-label="Search">
-                                <input id="author-input" type="search" placeholder="Author" aria-label="Search">
-                                <button id="search-button">search</button>
-                            </div>
-                    </form>
+                    <div class="row">
 
-                    <form>
-                        <div class="row">
-                            <div class="six columns">
-                                <input id="movie-input" type="search" placeholder="Movie Title" aria-label="Search">
-                                <button id="search-button">search</button>
-                            </div>
+
+                        <div class="six columns">
+                            <form>
+                                <input class="search-input" id="title-input" type="search" placeholder="Book Title" aria-label="Search">
+                                <input class="search-input" id="author-input" type="search" placeholder="Author" aria-label="Search">
+                                <button id="book-search-button">Book Search</button>
+                            </form>
                         </div>
-                    </form>
 
+
+                        <div class="six columns">
+                            <form>
+                                <input class="search-input" id="movie-title-input" type="search" placeholder="Movie Title" aria-label="Search">
+                                <input class="search-input" id="movie-year-input" type="search" placeholder="Movie Year" aria-label="Search">
+                                <button id="movie-search-button">Movie Search</button>
+                            </form>
+                        </div>
+
+
+                    </div>
                 </section>
 
             </main>
@@ -116,7 +120,7 @@
 
                     </div>
 
-                    <p class="rating" id="book-rating">GoodRead Rating: <span id="goodread-score">3</span></p>
+                    <p class="rating" id="book-rating">Google Books Rating: <span id="google-books-score">3</span>/10</p>
 
                 </section>
             </div>
