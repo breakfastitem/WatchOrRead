@@ -91,13 +91,8 @@ button:focus {
     height: 150px;
 }
 
-.button-primary {
-
-    margin-bottom: 5px;
-
-}
 .results {
-
+    margin-bottom: 5px;
     background-color: rgb(115, 161, 7);
     border: white 1px solid;
     width: 100%;
