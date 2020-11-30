@@ -23,21 +23,19 @@
 </head>
 
 <body>
-
-
-        <div class="row">
-            <header class="header twelve columns">
-                <div class="container">
-                    <nav>
-                        <ul>
-                            <li>
-                                <a href="#">Home</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </header>
-            </div>
-        </div>
+    <div class="row">
+        <header class="header twelve columns">
+            <div class="container">
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                    </ul>
+                </nav>
+        </header>
+    </div>
+    </div>
 
     <div class="container">
         <div class="row">
@@ -45,10 +43,11 @@
             <main class="content twelve columns">
                 <h1>Watch or Read</h1>
 
-                    <p id="about">
-                        This app allows you to search a movie and determine if there exists a book adaptation. It also compares reviews of the book and movie then makes a recomendation. 
-                    </p>
-        
+                <p id="about">
+                    This app allows you to search a movie and determine if there exists a book adaptation. It also
+                    compares reviews of the book and movie then makes a recomendation.
+                </p>
+
 
                 <section id="search-div">
                     <form>
@@ -76,23 +75,22 @@
 
         <hr>
 
-
         <!-- Search Results -->
         <div class="row">
             <div class="six columns">
                 <section id="results-display">
                     <h2 class="result-title" id="book-results">Book Results</h2>
-                        <button class="button-primary" id="results">harry potter and the sorcerer's stone</button>
-                        <button class="button-primary" id="results">harry potter and the chamber of secrets</button>
-                        <button class="button-primary" id="results">harry potter and the prisoner of azkaban</button>
+                    <button class="button-primary results" id="book-1">harry potter and the sorcerer's stone</button>
+                    <button class="button-primary results" id="book-2">harry potter and the chamber of secrets</button>
+                    <button class="button-primary results" id="book-3">harry potter and the prisoner of azkaban</button>
             </div>
 
             <div class="six columns">
-                    <h2 class="result-title" id="movie-results">Movie Results</h2>
-                        <button class="button-primary" id="results">harry potter and the sorcerer's stone</button>
-                        <button class="button-primary" id="results">harry potter and the chamber of secrets</button>
-                        <button class="button-primary" id="results">harry potter and the prisoner of azkaban</button>
-                </div>
+                <h2 class="result-title" id="movie-results">Movie Results</h2>
+                <button class="button-primary results" id="movie-1">harry potter and the sorcerer's stone</button>
+                <button class="button-primary results" id="movie-2">harry potter and the chamber of secrets</button>
+                <button class="button-primary results" id="movie-3">harry potter and the prisoner of azkaban</button>
+            </div>
             </section>
         </div>
 
@@ -110,10 +108,10 @@
                         <div class="four columns">
                             <img class="cover" id="book-cover" src="https://place-hold.it/100x150" />
                         </div>
-                        <div class="eight columns" >
+                        <div class="eight columns">
                             <p class="description" id="book-plot">Book Description</p>
                         </div>
-                        
+
                     </div>
 
                     <p class="rating" id="book-rating">GoodRead Rating: <span id="goodread-score">3</span></p>
@@ -128,10 +126,10 @@
                         <div class="four columns">
                             <img class="cover" id="movie-poster" src="https://place-hold.it/100x150" />
                         </div>
-                        <div class="eight columns" >
+                        <div class="eight columns">
                             <p class="description" id="movie-plot">Movie Description</p>
                         </div>
-                        
+
                     </div>
 
                     <p class="rating" id="movie-rating">IMDB Rating: <span id="imdb-score">3</span>/10</p>
