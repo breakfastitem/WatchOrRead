@@ -7,7 +7,7 @@
     <title>Watch Or Read</title>
 
 
-    
+
 
     <!--Skeleton Boilerplate-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
@@ -57,8 +57,10 @@
 
                         <div class="six columns">
                             <form>
-                                <input class="search-input" id="title-input" type="search" placeholder="Book Title" aria-label="Search">
-                                <input class="search-input" id="author-input" type="search" placeholder="Author" aria-label="Search">
+                                <input class="search-input" id="title-input" type="search" placeholder="Book Title"
+                                    aria-label="Search">
+                                <input class="search-input" id="author-input" type="search" placeholder="Author"
+                                    aria-label="Search">
                                 <button id="book-search-button">Book Search</button>
                             </form>
                         </div>
@@ -66,8 +68,10 @@
 
                         <div class="six columns">
                             <form>
-                                <input class="search-input" id="movie-title-input" type="search" placeholder="Movie Title" aria-label="Search">
-                                <input class="search-input" id="movie-year-input" type="search" placeholder="Movie Year" aria-label="Search">
+                                <input class="search-input" id="movie-title-input" type="search"
+                                    placeholder="Movie Title" aria-label="Search">
+                                <input class="search-input" id="movie-year-input" type="search" placeholder="Movie Year"
+                                    aria-label="Search">
                                 <button id="movie-search-button">Movie Search</button>
                             </form>
                         </div>
@@ -83,20 +87,24 @@
 
         <!-- Search Results -->
         <div class="row">
-            <div class="six columns">
-                <section id="results-display">
-                    <h2 class="result-title" id="book-results">Book Results</h2>
-                    <button class="results" id="book-1">harry potter and the sorcerer's stone</button>
-                    <button class="results" id="book-2">harry potter and the chamber of secrets</button>
-                    <button class="results" id="book-3">harry potter and the prisoner of azkaban</button>
-            </div>
+            <section id="results-display">
+                <div class="six columns">
+                    <div id="book-results">
+                        <h2 class="result-title" >Book Results</h2>
+                        <button class="results" id="book-1">harry potter and the sorcerer's stone</button>
+                        <button class="results" id="book-2">harry potter and the chamber of secrets</button>
+                        <button class="results" id="book-3">harry potter and the prisoner of azkaban</button>
+                    </div>
+                </div>
 
-            <div class="six columns">
-                <h2 class="result-title" id="movie-results">Movie Results</h2>
-                <button class="results" id="movie-1">harry potter and the sorcerer's stone</button>
-                <button class="results" id="movie-2">harry potter and the chamber of secrets</button>
-                <button class="results" id="movie-3">harry potter and the prisoner of azkaban</button>
-            </div>
+                <div class="six columns">
+                    <div id="book-results">
+                        <h2 class="result-title" id="movie-results">Movie Results</h2>
+                        <button class="results" id="movie-1">harry potter and the sorcerer's stone</button>
+                        <button class="results" id="movie-2">harry potter and the chamber of secrets</button>
+                        <button class="results" id="movie-3">harry potter and the prisoner of azkaban</button>
+                    </div>
+                </div>
             </section>
         </div>
 
@@ -120,7 +128,8 @@
 
                     </div>
 
-                    <p class="rating" id="book-rating">Google Books Rating: <span id="google-books-score">3</span>/10</p>
+                    <p class="rating" id="book-rating">Google Books Rating: <span id="google-books-score">3</span>/10
+                    </p>
 
                 </section>
             </div>

@@ -3,12 +3,37 @@
  */
 var firstSearch = "sorcerer's stone";
 
-var bookResults;
-var movieResults;
+var bookResults=[];
+var movieResults=[];
 
 /**
  * static functions
  */
+
+function displayBookResults(){
+    var bookResultsDiv =$("#book-results");
+
+    if(bookResults.length ===0){
+        console.log("No books found in search");
+    }else{
+        bookResultsDiv.empty();
+
+        var bookheader = $("<h2 class=`result-title` >Book Results</h2>");
+
+        bookResultsDiv.append(bookheader);
+
+        for(var i=0;i<bookResults.length;i++){
+
+            var bookButton = $(`<button class="results" id="book-${i}">${bookResults[i].title}</button>`);
+            bookResultsDiv.append(bookButton);
+
+        }
+        
+
+       
+    }
+}
+
 function searchMovie(name) {
 
     var omdbUrl = "http://www.omdbapi.com/?t=" + name + "&apikey=8e4b0c73";
@@ -55,7 +80,7 @@ function searchBook(name, authorName) {
         console.log("error - no parameters");
 
     } else {
-        searchMovie(name);
+        
            $.ajax({
             method: "GET",
             url: openLibraryUrl
@@ -85,6 +110,7 @@ function searchBook(name, authorName) {
 
             //books rating
             var googleBooksUrl=`https://www.googleapis.com/books/v1/volumes?q=isbn:${bookIsbn}&key=AIzaSyBtYq9z6CgPa4rmGWVSkwwSORdFIuFLc_4`;
+
             $.ajax({
                 method: "GET",
                 url: googleBooksUrl
@@ -93,11 +119,16 @@ function searchBook(name, authorName) {
                 $("#google-books-score").text(res.items[0].volumeInfo.averageRating*2);
 
             });
+            bookResults=[];
+
+            //Temporary location for search results
+             for(var i=0; i<5&&i<res.docs.length;i++){
+                bookResults.push(res.docs[i]); 
+            }
+            displayBookResults();
         });
 
     }
-
-
 
 }
 
@@ -112,9 +143,12 @@ $(document).ready(function () {
         var bookAuthor = $("#author-input").val();
         
         searchBook(bookTitle, bookAuthor);
+        searchMovie(name);
+
+        
 
         localStorage.setItem("search",bookTitle);
-    })
+    });
 
     $(".results").on("click",function(event){
         event.preventDefault();
@@ -124,8 +158,7 @@ $(document).ready(function () {
 
         console.log(type+" "+index);
 
-        
-    })
+    });
 
 });
 
@@ -140,3 +173,6 @@ if (firstSearchTemp != null) {
 }
 
 searchBook(firstSearch,"");
+searchMovie(firstSearch);
+
+displayBookResults();
