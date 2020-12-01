@@ -8,13 +8,16 @@ var firstSearch = "sorcerer's stone";
  */
 function searchMovie(name) {
 
-    var omdbUrl = "http://www.omdbapi.com/?t=" + name + "&apikey=8e4b0c73";
-
+    var omdbUrl = "http://www.omdbapi.com/?s=" + name + "&apikey=8e4b0c73&type=movie";
+    
     $.ajax({
         method: "GET",
         url: omdbUrl
 
     }).then(function (res) {
+        console.log(res);
+        var id = res.Search[0].imdbID;
+        secondMovie(id)
 
         // movie title
         var movieTitle = res.Title;
@@ -32,6 +35,25 @@ function searchMovie(name) {
         $("#imdb-score").text(res.imdbRating);
 
     });
+
+}
+
+
+// added a 2nd API call to get more specific and desired information about our movie search
+
+function secondMovie(id) {
+        console.log(id);
+        omdbUrl = "http://www.omdbapi.com/?i=" + id + "&apikey=8e4b0c73&type=movie";
+        $.ajax({
+            method: "GET",
+            url: omdbUrl
+    
+        }).then(function (res) {
+            console.log(res);
+            //build the html content here (confirm skeleton framework class is called card?)
+            var card  = $("<div>").addClass("card");
+            var cardImg = $("<img>").addClass("card-image").attr("src", res.Poster)
+        });
 
 }
 
@@ -94,8 +116,6 @@ function searchBook(name, authorName) {
 
     }
 
-
-
 }
 
 /**
@@ -111,6 +131,14 @@ $(document).ready(function () {
         searchBook(bookTitle, bookAuthor);
 
         localStorage.setItem("search",bookTitle);
+    })
+    $("#movie-search-button").on("click", function (event) {
+        event.preventDefault();
+
+        var movieTitle = $("#movie-input").val();
+        searchMovie(movieTitle);
+       
+
     })
 
 });
