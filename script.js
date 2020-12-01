@@ -10,7 +10,7 @@ var movieResults=[];
  * static functions
  */
 
-function displayBookResults(){
+function displayBooksList(){
     var bookResultsDiv =$("#book-results");
 
     if(bookResults.length ===0){
@@ -24,14 +24,60 @@ function displayBookResults(){
 
         for(var i=0;i<bookResults.length;i++){
 
-            var bookButton = $(`<button class="results" id="book-${i}">${bookResults[i].title}</button>`);
+            var bookButton = $(`<button>`);
+            bookButton.attr("class","results");
+            bookButton.attr("id", `book-${i}`);
+            bookButton.text(bookResults[i].title);
+
             bookResultsDiv.append(bookButton);
 
         }
-        
-
        
     }
+}
+
+function displayBookData(bookIndex){
+
+     //book title
+     var bookTitle = bookResults[bookIndex].title;
+     $("#book-title").text(bookTitle);
+
+     // book cover
+     var bookIsbn = bookResults[bookIndex].isbn[0];
+
+     var bookCoverURL = "http://covers.openlibrary.org/b/isbn/" + bookIsbn + "-M.jpg";
+
+     $("#book-cover").attr("src", bookCoverURL);
+
+     //book description
+     var worksUrl = `https://openlibrary.org${bookResults[bookIndex].key}.json`;
+
+     $.ajax({
+         method: "GET",
+         url: worksUrl,
+     }).then(function (res) {
+   
+         if(res.description.value===undefined){
+            $("#book-plot").text("No Description Available");
+         }
+         $("#book-plot").text(res.description.value);
+     });
+
+     //books rating
+     var googleBooksUrl=`https://www.googleapis.com/books/v1/volumes?q=isbn:${bookIsbn}&key=AIzaSyBtYq9z6CgPa4rmGWVSkwwSORdFIuFLc_4`;
+
+     $.ajax({
+         method: "GET",
+         url: googleBooksUrl
+     }).then(function (res) {
+
+        if(res.items[0].volumeInfo.averageRating===undefined){
+            $("#google-books-score").text("-");
+        }else{
+            $("#google-books-score").text(res.items[0].volumeInfo.averageRating*2);
+        } 
+
+     });
 }
 
 function searchMovie(name) {
@@ -74,7 +120,6 @@ function searchBook(name, authorName) {
 
 
     //Directions for search api https://openlibrary.org/dev/docs/api/search
-    console.log(openLibraryUrl);
 
     if (openLibraryUrl === "http://openlibrary.org/search.json?") {
         console.log("error - no parameters");
@@ -86,46 +131,18 @@ function searchBook(name, authorName) {
             url: openLibraryUrl
 
         }).then(function (res) {
+            //TEMPorary
+            searchMovie(name);
             
-            //book title
-            var bookTitle = res.docs[0].title;
-            $("#book-title").text(bookTitle);
-
-            // book cover
-            var bookIsbn = res.docs[0].isbn[0];
-
-            var bookCoverURL = "http://covers.openlibrary.org/b/isbn/" + bookIsbn + "-M.jpg";
-
-            $("#book-cover").attr("src", bookCoverURL);
-
-            //book description
-            var worksUrl = `https://openlibrary.org${res.docs[0].key}.json`;
-
-            $.ajax({
-                method: "GET",
-                url: worksUrl
-            }).then(function (res) {
-                $("#book-plot").text(res.description.value);
-            });
-
-            //books rating
-            var googleBooksUrl=`https://www.googleapis.com/books/v1/volumes?q=isbn:${bookIsbn}&key=AIzaSyBtYq9z6CgPa4rmGWVSkwwSORdFIuFLc_4`;
-
-            $.ajax({
-                method: "GET",
-                url: googleBooksUrl
-            }).then(function (res) {
-
-                $("#google-books-score").text(res.items[0].volumeInfo.averageRating*2);
-
-            });
             bookResults=[];
 
             //Temporary location for search results
              for(var i=0; i<5&&i<res.docs.length;i++){
                 bookResults.push(res.docs[i]); 
             }
-            displayBookResults();
+            
+            displayBooksList();
+            displayBookData(0);
         });
 
     }
@@ -143,21 +160,25 @@ $(document).ready(function () {
         var bookAuthor = $("#author-input").val();
         
         searchBook(bookTitle, bookAuthor);
-        searchMovie(name);
+        
 
         
 
         localStorage.setItem("search",bookTitle);
     });
 
-    $(".results").on("click",function(event){
+    $("#book-results").on("click",function(event){
         event.preventDefault();
-
+    
         var type = event.target.id.split("-")[0];
         var index = event.target.id.split("-")[1];
+    
+        if(type === "book"){
 
-        console.log(type+" "+index);
+            displayBookData(index);
 
+        }
+    
     });
 
 });
@@ -175,4 +196,3 @@ if (firstSearchTemp != null) {
 searchBook(firstSearch,"");
 searchMovie(firstSearch);
 
-displayBookResults();
