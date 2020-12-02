@@ -29,7 +29,7 @@ function displayBooksList() {
             var bookButton = $(`<button>`);
             bookButton.attr("class", "results");
             bookButton.attr("id", `book-${i}`);
-            bookButton.text(bookResults[i].title);
+            bookButton.text(bookResults[i].title + " (" + bookResults[i].first_publish_year + ")");
 
             bookResultsDiv.append(bookButton);
 
@@ -58,10 +58,17 @@ function displayBookData(bookIndex) {
         url: worksUrl,
     }).then(function (res) {
 
+        console.log(res);
+
         if (res.description.value === undefined) {
             $("#book-plot").text("No Description Available");
         }
-        $("#book-plot").text(res.description.value);
+        
+        var description = res.description.value;
+        description = description.substring(0, 200);
+        description += "...";
+        
+        $("#book-plot").text(description);
     });
 
     //books rating
@@ -71,6 +78,7 @@ function displayBookData(bookIndex) {
         method: "GET",
         url: googleBooksUrl
     }).then(function (res) {
+
         bookRating=res.items[0].volumeInfo.averageRating;
 
         if (bookRating === undefined) {
@@ -103,7 +111,7 @@ function displayMovieList() {
             var movieButton = $(`<button>`);
             movieButton.attr("class", "results");
             movieButton.attr("id", `movie-${i}`);
-            movieButton.text(movieResults[i].Title);
+            movieButton.text(movieResults[i].Title + " (" + movieResults[i].Year + ")");
 
             movieResultsDiv.append(movieButton);
 
@@ -225,9 +233,9 @@ function displaySuggestion(bookRating, movieRating) {
     if (Number(bookRating) > Number(movieRating)) {
         $("#suggestion").text("The book is better than the movie, you should read!")
     } else if (bookRating === null) {
-        $("#suggestion").text("There is no book rating available.")
+        $("#suggestion").text("There is no book rating available for us to compare.")
     } else if (movieRating === null) {
-        $("#suggestion").text("There is no movie rating available.")
+        $("#suggestion").text("There is no movie rating available for us to compare.")
     } else {
         $("#suggestion").text("The movie is better than the book, you should watch!")
     }
