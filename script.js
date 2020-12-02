@@ -2,6 +2,8 @@
  * static Variables
  */
 var firstSearch = "sorcerer's stone";
+var bookRating = null;
+var movieRating = null;
 
 /**
  * static functions
@@ -32,7 +34,8 @@ function searchMovie(name) {
         $("#movie-plot").text(moviePlot);
 
         //movie rating
-        $("#imdb-score").text(res.imdbRating);
+        movieRating = res.imdbRating;
+        $("#imdb-score").text(movieRating);
 
     });
 
@@ -109,7 +112,9 @@ function searchBook(name, authorName) {
                 url: googleBooksUrl
             }).then(function (res) {
 
-                $("#google-books-score").text(res.items[0].volumeInfo.averageRating*2);
+                bookRating = res.items[0].volumeInfo.averageRating*2;
+                $("#google-books-score").text(bookRating);
+
 
             });
         });
@@ -117,6 +122,23 @@ function searchBook(name, authorName) {
     }
 
 }
+
+
+
+function displaySuggestion(bookRating, movieRating) {
+
+    if (bookRating > movieRating) {
+        $("#suggestion").text("The book is better than the movie, you should read!")
+    } else if (bookRating === null) {
+        $("#suggestion").text("There is no book rating available.")
+    } else if (movieRating === null) {
+        $("#suggestion").text("There is no movie rating available.")
+    } else {
+        $("#suggestion").text("The movie is better than the book, you should watch!")
+    }
+
+}
+
 
 /**
  * Event Listeners
@@ -129,6 +151,7 @@ $(document).ready(function () {
         var bookAuthor = $("#author-input").val();
         
         searchBook(bookTitle, bookAuthor);
+        displaySuggestion(bookRating, movieRating);
 
         localStorage.setItem("search",bookTitle);
     })
