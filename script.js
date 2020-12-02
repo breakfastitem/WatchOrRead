@@ -112,11 +112,20 @@ function displayMovieList() {
 
 }
 
-function searchMovie(name) {
+function searchMovie(name,year) {
+
+    if(name.length=0){
+        console.log("No title was input");
+        return;
+    }
 
     movieResults=[];
 
     var omdbUrl = "https://www.omdbapi.com/?s=" + name + "&type=movie&apikey=8e4b0c73&type=movie";
+
+    if(year !="" && year.length !=4){
+        omdbUrl += "&y="+year;
+    }
 
     $.ajax({
         method: "GET",
@@ -289,4 +298,4 @@ if (firstSearchTemp != null) {
 }
 
 searchBook(firstSearch, "");
-searchMovie(firstSearch);
+searchMovie(firstSearch,"");
