@@ -11,11 +11,12 @@ The two server-side API's utilized in the application are below:
 
 The Open Movie Database - http://www.omdbapi.com/ 
 Open Library - https://openlibrary.org/developers/api 
+Google Books - https://books.google.com/books/about/Web_Service_APIs
 
-### Screenshot:
+## Screenshot:
 Below is a screenshot of the deployed "Watch or Read" application:
-https://github.com/breakfastitem/WatchOrRead/blob/readMe/WatchOrRead.PNG
+![WatchOrRead](https://github.com/breakfastitem/WatchOrRead/blob/readMe/WatchOrRead.PNG)
 
-#### URL:
+## URL:
 Below is a URL to view the "Watch or Read" application:
 https://breakfastitem.github.io/WatchOrRead/
