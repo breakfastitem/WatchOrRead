@@ -125,7 +125,7 @@ function searchMovie(name , year) {
 
     var omdbUrl = "https://www.omdbapi.com/?s=" + name + "&type=movie&apikey=8e4b0c73";
 
-    if(year != undefined){
+    if(year != "" && year.length >4){
         omdbUrl += "&y="+year;
     }
 
@@ -245,6 +245,7 @@ $(document).ready(function () {
         var bookAuthor = $("#author-input").val();
 
         searchBook(bookTitle, bookAuthor);
+        searchMovie(bookTitle, "");
 
         localStorage.setItem("search", bookTitle);
     })
@@ -281,7 +282,8 @@ $(document).ready(function () {
         event.preventDefault();
 
         var movieTitle = $("#movie-input").val();
-        searchMovie(movieTitle);
+        searchMovie(movieTitle,"");
+        searchBook(movieTitle,"");
 
     })
 
