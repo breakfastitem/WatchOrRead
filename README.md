@@ -11,9 +11,9 @@ The technologies used in the creation of this application are:
 
 The three server-side API's utilized in the application are below:
 
-* The Open Movie Database - http://www.omdbapi.com/ 
-* Open Library - https://openlibrary.org/developers/api 
-* Google Books - https://books.google.com/books/about/Web_Service_APIs
+* [The Open Movie Database](http://www.omdbapi.com/) 
+* [Open Library](https://openlibrary.org/developers/api)
+* [Google Books](https://books.google.com/books/about/Web_Service_APIs)
 
 ## Screenshot:
 Below is a screenshot of the deployed "Watch or Read" application:
