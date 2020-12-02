@@ -80,7 +80,7 @@ button:focus {
 
 /*Class Stylings*/
 .container{
-   width: 1200px;
+   width: 90%;
 }
 .header {
     background-color: black;
