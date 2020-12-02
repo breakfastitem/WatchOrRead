@@ -46,7 +46,7 @@ function displayBookData(bookIndex) {
     // book cover
     var bookIsbn = bookResults[bookIndex].isbn[0];
 
-    var bookCoverURL = "http://covers.openlibrary.org/b/isbn/" + bookIsbn + "-M.jpg";
+    var bookCoverURL = "https://covers.openlibrary.org/b/isbn/" + bookIsbn + "-M.jpg";
 
     $("#book-cover").attr("src", bookCoverURL);
 
@@ -116,7 +116,7 @@ function searchMovie(name) {
 
     movieResults=[];
 
-    var omdbUrl = "http://www.omdbapi.com/?s=" + name + "&apikey=8e4b0c73&type=movie";
+    var omdbUrl = "https://www.omdbapi.com/?s=" + name + "&type=movie&apikey=8e4b0c73&type=movie";
 
     $.ajax({
         method: "GET",
@@ -144,7 +144,7 @@ function searchMovie(name) {
 
 function displayMovieData(id) {
     console.log(id);
-    omdbUrl = "http://www.omdbapi.com/?i=" + id + "&apikey=8e4b0c73&type=movie";
+    omdbUrl = "https://www.omdbapi.com/?i=" + id + "&apikey=8e4b0c73&type=movie";
     $.ajax({
         method: "GET",
         url: omdbUrl
@@ -174,7 +174,7 @@ function displayMovieData(id) {
 
 function searchBook(name, authorName) {
 
-    var openLibraryUrl = "http://openlibrary.org/search.json?";
+    var openLibraryUrl = "https://openlibrary.org/search.json?";
     var titleMod = name ? "title=" + name : "";
     // ternary operator -     condition ? true branch : false branch
     var authorMod = authorName ? "author=" + authorName : "";
@@ -184,7 +184,7 @@ function searchBook(name, authorName) {
 
     //Directions for search api https://openlibrary.org/dev/docs/api/search
 
-    if (openLibraryUrl === "http://openlibrary.org/search.json?") {
+    if (openLibraryUrl === "https://openlibrary.org/search.json?") {
         console.log("error - no parameters");
     } else {
 
@@ -193,8 +193,6 @@ function searchBook(name, authorName) {
             url: openLibraryUrl
 
         }).then(function (res) {
-            //TEMPorary
-            searchMovie(name);
 
             bookResults = [];
 
