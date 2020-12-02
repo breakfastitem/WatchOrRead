@@ -99,14 +99,21 @@ button:focus {
     height: 150px;
 }
 
-.button-primary {
-
+.results {
+    color: white;
     margin-bottom: 5px;
+    background-color: rgb(115, 161, 7);
+    border: white 1px solid;
+    width: 100%;
 
 }
 
-.search-input {
-    margin-bottom: 5px;
+.results:hover {
+
+    background-color: white;
+    border:  rgb(115, 161, 7) 1px solid;
+    color: rgb(115, 161, 7);
+
 }
 
 /*Id stylings*/
@@ -118,23 +125,6 @@ button:focus {
     margin-left: auto;
     
 }
-
-#results {
-
-    background-color: rgb(115, 161, 7);
-    border: white 1px solid;
-    width: 100%;
-
-}
-
-#results:hover {
-
-    background-color: white;
-    border:  rgb(115, 161, 7) 1px solid;
-    color: rgb(115, 161, 7);
-
-}
-
 #search-input {
 
     margin-bottom: 5px;
