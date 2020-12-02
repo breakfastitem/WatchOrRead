@@ -1,7 +1,7 @@
 /**
  * static Variables
  */
-var firstSearch = "sorcerer's stone";
+var firstSearch = "twilight";
 var bookRating = null;
 var movieRating = null;
 
@@ -112,11 +112,22 @@ function displayMovieList() {
 
 }
 
-function searchMovie(name) {
+function searchMovie(name , year) {
+
+    console.log(year);
+
+    if(name.length=0){
+        console.log("No title was input");
+        return;
+    }
 
     movieResults=[];
 
-    var omdbUrl = "https://www.omdbapi.com/?s=" + name + "&type=movie&apikey=8e4b0c73&type=movie";
+    var omdbUrl = "https://www.omdbapi.com/?s=" + name + "&type=movie&apikey=8e4b0c73";
+
+    if(year != undefined){
+        omdbUrl += "&y="+year;
+    }
 
     $.ajax({
         method: "GET",
@@ -211,9 +222,6 @@ function searchBook(name, authorName) {
 
 function displaySuggestion(bookRating, movieRating) {
 
-    console.log(bookRating);
-    console.log(movieRating);
-
     if (Number(bookRating) > Number(movieRating)) {
         $("#suggestion").text("The book is better than the movie, you should read!")
     } else if (bookRating === null) {
@@ -289,4 +297,4 @@ if (firstSearchTemp != null) {
 }
 
 searchBook(firstSearch, "");
-searchMovie(firstSearch);
+searchMovie(firstSearch,"");
