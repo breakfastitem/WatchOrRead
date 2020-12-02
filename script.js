@@ -3,96 +3,147 @@
  */
 var firstSearch = "sorcerer's stone";
 
-var bookResults=[];
-var movieResults=[];
+var bookResults = [];
+var movieResults = [];
 
 /**
  * static functions
  */
 
-function displayBooksList(){
-    var bookResultsDiv =$("#book-results");
+function displayBooksList() {
+    var bookResultsDiv = $("#book-results");
 
-    if(bookResults.length ===0){
+    if (bookResults.length === 0) {
         console.log("No books found in search");
-    }else{
+    } else {
         bookResultsDiv.empty();
 
         var bookheader = $("<h2 class=`result-title` >Book Results</h2>");
 
         bookResultsDiv.append(bookheader);
 
-        for(var i=0;i<bookResults.length;i++){
+        for (var i = 0; i < bookResults.length; i++) {
 
             var bookButton = $(`<button>`);
-            bookButton.attr("class","results");
+            bookButton.attr("class", "results");
             bookButton.attr("id", `book-${i}`);
             bookButton.text(bookResults[i].title);
 
             bookResultsDiv.append(bookButton);
 
         }
-       
     }
 }
 
-function displayBookData(bookIndex){
+function displayBookData(bookIndex) {
 
-     //book title
-     var bookTitle = bookResults[bookIndex].title;
-     $("#book-title").text(bookTitle);
+    //book title
+    var bookTitle = bookResults[bookIndex].title;
+    $("#book-title").text(bookTitle);
 
-     // book cover
-     var bookIsbn = bookResults[bookIndex].isbn[0];
+    // book cover
+    var bookIsbn = bookResults[bookIndex].isbn[0];
 
-     var bookCoverURL = "http://covers.openlibrary.org/b/isbn/" + bookIsbn + "-M.jpg";
+    var bookCoverURL = "http://covers.openlibrary.org/b/isbn/" + bookIsbn + "-M.jpg";
 
-     $("#book-cover").attr("src", bookCoverURL);
+    $("#book-cover").attr("src", bookCoverURL);
 
-     //book description
-     var worksUrl = `https://openlibrary.org${bookResults[bookIndex].key}.json`;
+    //book description
+    var worksUrl = `https://openlibrary.org${bookResults[bookIndex].key}.json`;
 
-     $.ajax({
-         method: "GET",
-         url: worksUrl,
-     }).then(function (res) {
-   
-         if(res.description.value===undefined){
+    $.ajax({
+        method: "GET",
+        url: worksUrl,
+    }).then(function (res) {
+
+        if (res.description.value === undefined) {
             $("#book-plot").text("No Description Available");
-         }
-         $("#book-plot").text(res.description.value);
-     });
+        }
+        $("#book-plot").text(res.description.value);
+    });
 
-     //books rating
-     var googleBooksUrl=`https://www.googleapis.com/books/v1/volumes?q=isbn:${bookIsbn}&key=AIzaSyBtYq9z6CgPa4rmGWVSkwwSORdFIuFLc_4`;
+    //books rating
+    var googleBooksUrl = `https://www.googleapis.com/books/v1/volumes?q=isbn:${bookIsbn}&key=AIzaSyBtYq9z6CgPa4rmGWVSkwwSORdFIuFLc_4`;
 
-     $.ajax({
-         method: "GET",
-         url: googleBooksUrl
-     }).then(function (res) {
+    $.ajax({
+        method: "GET",
+        url: googleBooksUrl
+    }).then(function (res) {
 
-        if(res.items[0].volumeInfo.averageRating===undefined){
+        if (res.items[0].volumeInfo.averageRating === undefined) {
             $("#google-books-score").text("-");
-        }else{
-            $("#google-books-score").text(res.items[0].volumeInfo.averageRating*2);
-        } 
+        } else {
+            $("#google-books-score").text(res.items[0].volumeInfo.averageRating * 2);
+        }
 
-     });
+    });
+}
+
+function displayMovieList() {
+    var movieResultsDiv = $("#movie-results");
+
+    if (movieResults.length === 0) {
+        console.log("No movies found in search");
+    } else {
+        movieResultsDiv.empty();
+
+        var movieHeader = $("<h2 class=`result-title`>Movie Results</h2>");
+
+        movieResultsDiv.append(movieHeader);
+
+        for (var i = 0; i < movieResults.length; i++) {
+
+            var movieButton = $(`<button>`);
+            movieButton.attr("class", "results");
+            movieButton.attr("id", `movie-${i}`);
+            movieButton.text(movieResults[i].Title);
+
+            movieResultsDiv.append(movieButton);
+
+        }
+    }
+
 }
 
 function searchMovie(name) {
 
+    movieResults=[];
+
     var omdbUrl = "http://www.omdbapi.com/?s=" + name + "&apikey=8e4b0c73&type=movie";
-    
+
+    $.ajax({
+        method: "GET",
+        url: omdbUrl,
+        error: function (){
+            console.log("No Movies Found");
+        }
+
+    }).then(function (res) {
+        console.log(res);
+
+        for (var i = 0; i < 5 && i < res.Search.length; i++) {
+            movieResults.push(res.Search[i]);
+        }
+
+        displayMovieList();
+
+        displayMovieData(movieResults[0].imdbID);
+
+    });
+
+}
+
+
+// added a 2nd API call to get more specific and desired information about our movie search
+
+function displayMovieData(id) {
+    console.log(id);
+    omdbUrl = "http://www.omdbapi.com/?i=" + id + "&apikey=8e4b0c73&type=movie";
     $.ajax({
         method: "GET",
         url: omdbUrl
 
     }).then(function (res) {
-        console.log(res);
-        var id = res.Search[0].imdbID;
-        secondMovie(id)
-
         // movie title
         var movieTitle = res.Title;
         $("#movie-title").text(movieTitle);
@@ -107,27 +158,7 @@ function searchMovie(name) {
 
         //movie rating
         $("#imdb-score").text(res.imdbRating);
-
     });
-
-}
-
-
-// added a 2nd API call to get more specific and desired information about our movie search
-
-function secondMovie(id) {
-        console.log(id);
-        omdbUrl = "http://www.omdbapi.com/?i=" + id + "&apikey=8e4b0c73&type=movie";
-        $.ajax({
-            method: "GET",
-            url: omdbUrl
-    
-        }).then(function (res) {
-            console.log(res);
-            //build the html content here (confirm skeleton framework class is called card?)
-            var card  = $("<div>").addClass("card");
-            var cardImg = $("<img>").addClass("card-image").attr("src", res.Poster)
-        });
 
 }
 
@@ -145,24 +176,23 @@ function searchBook(name, authorName) {
 
     if (openLibraryUrl === "http://openlibrary.org/search.json?") {
         console.log("error - no parameters");
-
     } else {
-        
-           $.ajax({
+
+        $.ajax({
             method: "GET",
             url: openLibraryUrl
 
         }).then(function (res) {
             //TEMPorary
             searchMovie(name);
-            
-            bookResults=[];
+
+            bookResults = [];
 
             //Temporary location for search results
-             for(var i=0; i<5&&i<res.docs.length;i++){
-                bookResults.push(res.docs[i]); 
+            for (var i = 0; i < 5 && i < res.docs.length; i++) {
+                bookResults.push(res.docs[i]);
             }
-            
+
             displayBooksList();
             displayBookData(0);
         });
@@ -180,35 +210,49 @@ $(document).ready(function () {
 
         var bookTitle = $("#title-input").val();
         var bookAuthor = $("#author-input").val();
-        
+
         searchBook(bookTitle, bookAuthor);
-        
 
-        
 
-        localStorage.setItem("search",bookTitle);
+
+
+        localStorage.setItem("search", bookTitle);
     })
 
-    $("#book-results").on("click",function(event){
+    $("#book-results").on("click", function (event) {
         event.preventDefault();
-    
+
         var type = event.target.id.split("-")[0];
         var index = event.target.id.split("-")[1];
-    
-        if(type === "book"){
+
+        if (type === "book") {
 
             displayBookData(index);
 
         }
-    
+
     })
-    
+
+    $("#movie-results").on("click", function (event) {
+        event.preventDefault();
+
+        var type = event.target.id.split("-")[0];
+        var index = event.target.id.split("-")[1];
+
+        if (type === "movie") {
+
+            displayMovieData(movieResults[index].imdbID);
+
+        }
+
+    })
+
     $("#movie-search-button").on("click", function (event) {
         event.preventDefault();
 
         var movieTitle = $("#movie-input").val();
         searchMovie(movieTitle);
-       
+
 
     })
 
@@ -224,6 +268,6 @@ if (firstSearchTemp != null) {
     firstSearch = firstSearchTemp;
 }
 
-searchBook(firstSearch,"");
+searchBook(firstSearch, "");
 searchMovie(firstSearch);
 
