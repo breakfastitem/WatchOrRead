@@ -116,6 +116,11 @@ button:focus {
 
 }
 
+.search-input {
+
+    margin-bottom: 6px;
+}
+
 /*Id stylings*/
 #about {
 
@@ -124,8 +129,4 @@ button:focus {
     margin-right: auto;
     margin-left: auto;
     
-}
-#search-input {
-
-    margin-bottom: 5px;
 }
