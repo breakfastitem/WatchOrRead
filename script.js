@@ -71,12 +71,17 @@ function displayBookData(bookIndex) {
         method: "GET",
         url: googleBooksUrl
     }).then(function (res) {
+        bookRating=res.items[0].volumeInfo.averageRating;
 
-        if (res.items[0].volumeInfo.averageRating === undefined) {
+        if (bookRating === undefined) {
+            bookRating=null;
             $("#google-books-score").text("-");
         } else {
+            bookRating= res.items[0].volumeInfo.averageRating * 2;
             $("#google-books-score").text(res.items[0].volumeInfo.averageRating * 2);
         }
+
+        displaySuggestion(bookRating, movieRating);
 
     });
 }
@@ -135,7 +140,6 @@ function searchMovie(name) {
 
 }
 
-
 // added a 2nd API call to get more specific and desired information about our movie search
 
 function displayMovieData(id) {
@@ -161,6 +165,8 @@ function displayMovieData(id) {
         //movie rating
         movieRating = res.imdbRating;
         $("#imdb-score").text(movieRating);
+
+        displaySuggestion(bookRating, movieRating);
 
     });
 
@@ -205,11 +211,12 @@ function searchBook(name, authorName) {
 
 }
 
-
-
 function displaySuggestion(bookRating, movieRating) {
 
-    if (bookRating > movieRating) {
+    console.log(bookRating);
+    console.log(movieRating);
+
+    if (Number(bookRating) > Number(movieRating)) {
         $("#suggestion").text("The book is better than the movie, you should read!")
     } else if (bookRating === null) {
         $("#suggestion").text("There is no book rating available.")
@@ -220,7 +227,6 @@ function displaySuggestion(bookRating, movieRating) {
     }
 
 }
-
 
 /**
  * Event Listeners
@@ -233,10 +239,6 @@ $(document).ready(function () {
         var bookAuthor = $("#author-input").val();
 
         searchBook(bookTitle, bookAuthor);
-        displaySuggestion(bookRating, movieRating);
-
-
-
 
         localStorage.setItem("search", bookTitle);
     })
@@ -275,11 +277,9 @@ $(document).ready(function () {
         var movieTitle = $("#movie-input").val();
         searchMovie(movieTitle);
 
-
     })
 
 });
-
 
 /**
  * main
@@ -292,4 +292,3 @@ if (firstSearchTemp != null) {
 
 searchBook(firstSearch, "");
 searchMovie(firstSearch);
-
