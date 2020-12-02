@@ -32,6 +32,14 @@ h2 {
     font-weight: 200;
     text-align: center;
 }
+
+h3 {
+    font-size: 20px;
+    color: rgb(115, 161, 7);
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+}
 a {
     color: white;
     text-decoration: none;
@@ -121,4 +129,3 @@ button:focus {
 
     margin-bottom: 5px;
 }
-
