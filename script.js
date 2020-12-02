@@ -46,7 +46,7 @@ function displayBookData(bookIndex) {
     // book cover
     var bookIsbn = bookResults[bookIndex].isbn[0];
 
-    var bookCoverURL = "http://covers.openlibrary.org/b/isbn/" + bookIsbn + "-M.jpg";
+    var bookCoverURL = "https://covers.openlibrary.org/b/isbn/" + bookIsbn + "-M.jpg";
 
     $("#book-cover").attr("src", bookCoverURL);
 
@@ -71,12 +71,17 @@ function displayBookData(bookIndex) {
         method: "GET",
         url: googleBooksUrl
     }).then(function (res) {
+        bookRating=res.items[0].volumeInfo.averageRating;
 
-        if (res.items[0].volumeInfo.averageRating === undefined) {
+        if (bookRating === undefined) {
+            bookRating=null;
             $("#google-books-score").text("-");
         } else {
+            bookRating= res.items[0].volumeInfo.averageRating * 2;
             $("#google-books-score").text(res.items[0].volumeInfo.averageRating * 2);
         }
+
+        displaySuggestion(bookRating, movieRating);
 
     });
 }
@@ -111,7 +116,7 @@ function searchMovie(name) {
 
     movieResults=[];
 
-    var omdbUrl = "http://www.omdbapi.com/?s=" + name + "&apikey=8e4b0c73&type=movie";
+    var omdbUrl = "https://www.omdbapi.com/?s=" + name + "&type=movie&apikey=8e4b0c73&type=movie";
 
     $.ajax({
         method: "GET",
@@ -135,12 +140,11 @@ function searchMovie(name) {
 
 }
 
-
 // added a 2nd API call to get more specific and desired information about our movie search
 
 function displayMovieData(id) {
     console.log(id);
-    omdbUrl = "http://www.omdbapi.com/?i=" + id + "&apikey=8e4b0c73&type=movie";
+    omdbUrl = "https://www.omdbapi.com/?i=" + id + "&apikey=8e4b0c73&type=movie";
     $.ajax({
         method: "GET",
         url: omdbUrl
@@ -162,13 +166,15 @@ function displayMovieData(id) {
         movieRating = res.imdbRating;
         $("#imdb-score").text(movieRating);
 
+        displaySuggestion(bookRating, movieRating);
+
     });
 
 }
 
 function searchBook(name, authorName) {
 
-    var openLibraryUrl = "http://openlibrary.org/search.json?";
+    var openLibraryUrl = "https://openlibrary.org/search.json?";
     var titleMod = name ? "title=" + name : "";
     // ternary operator -     condition ? true branch : false branch
     var authorMod = authorName ? "author=" + authorName : "";
@@ -178,7 +184,7 @@ function searchBook(name, authorName) {
 
     //Directions for search api https://openlibrary.org/dev/docs/api/search
 
-    if (openLibraryUrl === "http://openlibrary.org/search.json?") {
+    if (openLibraryUrl === "https://openlibrary.org/search.json?") {
         console.log("error - no parameters");
     } else {
 
@@ -187,8 +193,6 @@ function searchBook(name, authorName) {
             url: openLibraryUrl
 
         }).then(function (res) {
-            //TEMPorary
-            searchMovie(name);
 
             bookResults = [];
 
@@ -205,11 +209,12 @@ function searchBook(name, authorName) {
 
 }
 
-
-
 function displaySuggestion(bookRating, movieRating) {
 
-    if (bookRating > movieRating) {
+    console.log(bookRating);
+    console.log(movieRating);
+
+    if (Number(bookRating) > Number(movieRating)) {
         $("#suggestion").text("The book is better than the movie, you should read!")
     } else if (bookRating === null) {
         $("#suggestion").text("There is no book rating available.")
@@ -220,7 +225,6 @@ function displaySuggestion(bookRating, movieRating) {
     }
 
 }
-
 
 /**
  * Event Listeners
@@ -233,10 +237,6 @@ $(document).ready(function () {
         var bookAuthor = $("#author-input").val();
 
         searchBook(bookTitle, bookAuthor);
-        displaySuggestion(bookRating, movieRating);
-
-
-
 
         localStorage.setItem("search", bookTitle);
     })
@@ -275,11 +275,9 @@ $(document).ready(function () {
         var movieTitle = $("#movie-input").val();
         searchMovie(movieTitle);
 
-
     })
 
 });
-
 
 /**
  * main
@@ -292,4 +290,3 @@ if (firstSearchTemp != null) {
 
 searchBook(firstSearch, "");
 searchMovie(firstSearch);
-
