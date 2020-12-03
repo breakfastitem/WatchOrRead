@@ -17,7 +17,7 @@ The three server-side API's utilized in the application are below:
 
 ## Screenshot:
 Below is a screenshot of the deployed "Watch or Read" application:
-![WatchOrRead](assets/watchOrRead)
+![WatchOrRead](https://github.com/breakfastitem/WatchOrRead/blob/main/assets/watchOrRead.PNG)
 
 ## URL:
 The finished project can be deployed [here](https://breakfastitem.github.io/WatchOrRead/).
